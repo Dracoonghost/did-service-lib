@@ -1,3 +1,4 @@
-import { Num } from './Num'
+import { keyOps } from './helpers/key-operation'
+import { didOps } from './helpers/did-operations'
 
-export { Num }
+export { keyOps, didOps }

@@ -1,5 +1,5 @@
 {
-  "name": "example-typescript-package",
+  "name": "did-volary-lib",
   "version": "0.2.2",
   "description": "",
   "main": "dist/cjs/index.js",
@@ -19,7 +19,7 @@
     "package": "npm run build && npm pack",
     "test": "jest --no-cache --runInBand",
     "test:cov": "jest --coverage --no-cache --runInBand",
-    "addscope": "node tools/packagejson name @tomchen/example-typescript-package"
+    "addscope": "node tools/packagejson name @tomchen/did-volary-lib"
   },
   "publishConfig": {
     "access": "public"
@@ -42,15 +42,19 @@
   ],
   "author": "Tom Chen <tomchen.org@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/tomchen/example-typescript-package",
+  "homepage": "https://github.com/tomchen/did-volary-lib",
   "repository": {
     "type": "git",
-    "url": "git@github.com:tomchen/example-typescript-package.git"
+    "url": "git@github.com:tomchen/did-volary-lib.git"
   },
   "bugs": {
-    "url": "https://github.com/tomchen/example-typescript-package/issues"
+    "url": "https://github.com/tomchen/did-volary-lib/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ethers": "^5.6.9",
+    "tweetnacl": "^1.0.3",
+    "tweetnacl-util": "^0.15.1"
+  },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",

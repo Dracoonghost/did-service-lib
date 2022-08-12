@@ -1,8 +1,8 @@
 import { keyOps } from './key-operation'
 
 export class didOps {
-  static generateDIDDocument(did: string): any {
-    const keyPair = keyOps.generateKeyPair()
+  static async generateDIDDocument(did: string, type: string): Promise<any> {
+    const keyPair = await keyOps.generateKeyPair(type)
     const id = `did:volary:${did}`
     return {
       didDoc: {
@@ -11,7 +11,10 @@ export class didOps {
         publicKey: [
           {
             id: `${did}#keys-1`,
-            type: 'Ed25519VerificationKey2018',
+            type:
+              type === 'bls12381g2'
+                ? 'Bls12381G2Key2020'
+                : 'Ed25519VerificationKey2018',
             owner: did,
             publicKeyBase64: keyPair.publicKey,
           },
@@ -30,7 +33,7 @@ export class didOps {
     secretKey: any
   ): any {
     const signatures: any[] = []
-    Object.entries(claims).forEach((claim) => {
+    Object.entries(claims).forEach((claim) => { 
       const claimKey = claim[0]
       const clainValue = claim[1]
       const objectToSign: any = {}

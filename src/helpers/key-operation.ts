@@ -37,15 +37,19 @@ export class KeyOps {
   }
 
   static async blsCreateProof(
-    messages: [string],
+    claims: any,
     publicKey: string,
     signature: string,
     nonce: string,
     revealed: []
   ): Promise<string> {
     const uMessages: Uint8Array[] = []
-    messages.forEach((message) => {
-      uMessages.push(Uint8Array.from(Buffer.from(message, 'utf-8')))
+    Object.entries(claims).forEach((claim) => {
+      const claimKey = claim[0]
+      const clainValue = claim[1]
+      const objectToSign: any = {}
+      objectToSign[claimKey] = clainValue
+      uMessages.push(Uint8Array.from(Buffer.from(JSON.stringify(objectToSign), 'utf-8')))
     })
     const proof = await blsCreateProof({
       signature: util.decodeBase64(signature),
@@ -58,14 +62,18 @@ export class KeyOps {
   }
 
   static async blsVerifyProof(
-    messages: [string],
+    claims: any,
     publicKey: string,
     nonce: string,
     proof: string
   ): Promise<BbsVerifyResult> {
     const uMessages: Uint8Array[] = []
-    messages.forEach((message) => {
-      uMessages.push(Uint8Array.from(Buffer.from(message, 'utf-8')))
+    Object.entries(claims).forEach((claim) => {
+      const claimKey = claim[0]
+      const clainValue = claim[1]
+      const objectToSign: any = {}
+      objectToSign[claimKey] = clainValue
+      uMessages.push(Uint8Array.from(Buffer.from(JSON.stringify(objectToSign), 'utf-8')))
     })
     const verified = await blsVerifyProof({
       publicKey: util.decodeBase64(publicKey),
@@ -77,10 +85,14 @@ export class KeyOps {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  static async blssign(messages: string[], keyPair: any): Promise<string> {
+  static async blssign(claims: any, keyPair: any): Promise<string> {
     const uMessages: Uint8Array[] = []
-    messages.forEach((message) => {
-      uMessages.push(Uint8Array.from(Buffer.from(message, 'utf-8')))
+    Object.entries(claims).forEach((claim) => {
+      const claimKey = claim[0]
+      const clainValue = claim[1]
+      const objectToSign: any = {}
+      objectToSign[claimKey] = clainValue
+      uMessages.push(Uint8Array.from(Buffer.from(JSON.stringify(objectToSign), 'utf-8')))
     })
     const decodedKeyPair: BlsKeyPair = {
       publicKey: util.decodeBase64(keyPair.publicKey),
@@ -94,14 +106,19 @@ export class KeyOps {
   }
 
   static async blsverify(
-    messages: [string],
+    claims:any,
     publicKey: string,
     signature: string
   ): Promise<BbsVerifyResult> {
     const uMessages: Uint8Array[] = []
-    messages.forEach((message) => {
-      uMessages.push(Uint8Array.from(Buffer.from(message, 'utf-8')))
+    Object.entries(claims).forEach((claim) => {
+      const claimKey = claim[0]
+      const clainValue = claim[1]
+      const objectToSign: any = {}
+      objectToSign[claimKey] = clainValue
+      uMessages.push(Uint8Array.from(Buffer.from(JSON.stringify(objectToSign), 'utf-8')))
     })
+
     const isVerified = await blsVerify({
       publicKey: util.decodeBase64(publicKey),
       messages: uMessages,

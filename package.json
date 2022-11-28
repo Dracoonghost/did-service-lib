@@ -1,6 +1,6 @@
 {
   "name": "@making-choice-personal/did-volary-lib",
-  "version": "0.2.3",
+  "version": "0.2.7",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

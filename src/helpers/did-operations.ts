@@ -45,15 +45,7 @@ export class DidOps {
   ): Promise<any> {
     try {
       if (type === 'bls12381g2') {
-        const messages: string[] = []
-        Object.entries(claims).forEach((claim) => {
-          const claimKey = claim[0]
-          const clainValue = claim[1]
-          const objectToSign: any = {}
-          objectToSign[claimKey] = clainValue
-          messages.push(JSON.stringify(objectToSign))
-        })
-        const signedClaim = await KeyOps.blssign(messages, keypair)
+        const signedClaim = await KeyOps.blssign(claims, keypair)
         const credentialSubject = claims
         credentialSubject['id'] = subjectDID
         return {

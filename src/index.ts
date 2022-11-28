@@ -1,4 +1,4 @@
-import { keyOps } from './helpers/key-operation'
-import { didOps } from './helpers/did-operations'
+import { KeyOps } from './helpers/key-operation'
+import { DidOps } from './helpers/did-operations'
 
-export { keyOps, didOps }
+export { KeyOps, DidOps }
